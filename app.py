@@ -17,10 +17,10 @@ symbol_map_yahoo = {s: s + ".NS" for s in symbols}
 st.info("Downloading historical price data from Yahoo Finance...")
 price_data = yf.download(list(symbol_map_yahoo.values()), period="1y", interval="1d", group_by="ticker", auto_adjust=False, progress=False)
 
-# ----- SECTION 1: Advance/Decline Ratio (Last 10 Days) -----
-st.header("🔄 Advance / Decline Ratio (Last 30 Days)")
+# ----- SECTION 1: Advance/Decline Ratio (Last 15 Days) -----
+st.header("🔄 Advance / Decline Ratio (Last 15 Days)")
 ad_summary = []
-for i in range(30):
+for i in range(15):
     day = datetime.today() - timedelta(days=i)
     advances = 0
     declines = 0
