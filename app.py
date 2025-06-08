@@ -14,8 +14,15 @@ symbols = sector_df["SYMBOL"].unique().tolist()
 symbol_map_yahoo = {s: s + ".NS" for s in symbols}
 
 # Download last 1 year of price data
-st.info("Downloading historical price data from Yahoo Finance...")
-price_data = yf.download(list(symbol_map_yahoo.values()), period="1y", interval="1d", group_by="ticker", auto_adjust=False, progress=False)
+with st.spinner("⏳ Fetching price data from Yahoo Finance... please wait"):
+    price_data = yf.download(
+        tickers=list(symbol_map_yahoo.values()),
+        period="1y",
+        interval="1d",
+        group_by="ticker",
+        progress=False,
+        auto_adjust=False
+    )
 
 # ----- SECTION 1: Advance/Decline Ratio (Last 15 Days) -----
 st.header("🔄 Advance / Decline Ratio (Last 15 Days)")
@@ -154,8 +161,15 @@ except:
     breakout_symbols = []
 
 # Download price data
-st.info("Downloading index component prices...")
-price_data = yf.download(list(symbol_map_yahoo.values()), period="1y", interval="1d", group_by="ticker", progress=False)
+with st.spinner("⏳ Fetching price data from Yahoo Finance... please wait"):
+    price_data = yf.download(
+        tickers=list(symbol_map_yahoo.values()),
+        period="1y",
+        interval="1d",
+        group_by="ticker",
+        progress=False,
+        auto_adjust=False
+    )
 
 # Index-wise breadth calculation
 index_breadth = []
